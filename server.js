@@ -26,27 +26,33 @@ app.use(cors(corsOptions));
 
 
 
+// Add this *before* any routes:
 
 const allowedOrigins = [
   'https://baby-names-frontend.vercel.app',
+  'https://baby-names-frontend-6co7mx691-thendoshanes-projects.vercel.app',  // ← your actual Vercel URL
   'http://localhost:5500',
   'http://127.0.0.1:5500'
 ];
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: ['GET', 'POST'],
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Accept'],
-};
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  // always include these for CORS
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  // if you ever use cookies/auth:
+  // res.header('Access-Control-Allow-Credentials', 'true');
 
-app.use(cors(corsOptions));
+  // intercept OPTIONS and respond immediately
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+
+  next();
+});
 
 
 
