@@ -104,7 +104,7 @@ app.post('/login', async (req, res) => {
   
   if (!email || !password) {
     return res.status(400).json({ message: 'Email and password are required' });
-  
+  }
   
   try {
     const user = await usersCollection.findOne({ 
