@@ -6,7 +6,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const app = express();
 const PORT = process.env.PORT || 5501;
 
-// CORS Config
+/*CORS Config
 const corsOptions = {
   origin: [
     'https://baby-names-frontend.vercel.app',   // your frontend on Vercel
@@ -17,6 +17,43 @@ const corsOptions = {
   allowedHeaders: ['Content-Type']
 };
 app.use(cors(corsOptions));
+
+*/
+
+
+
+
+
+
+
+
+const allowedOrigins = [
+  'https://baby-names-frontend.vercel.app',
+  'http://localhost:5500',
+  'http://127.0.0.1:5500'
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST'],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Accept'],
+};
+
+app.use(cors(corsOptions));
+
+
+
+
+
+
+
 app.use(express.json());
 
 // Database Setup
@@ -64,9 +101,11 @@ app.get('/health', (req, res) => {
 // Login Endpoint
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
-  if (!email || !password)
+  
+  if (!email || !password) {
     return res.status(400).json({ message: 'Email and password are required' });
-
+  
+  
   try {
     const user = await usersCollection.findOne({ 
       email: email.trim(), 
