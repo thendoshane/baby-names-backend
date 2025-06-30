@@ -1,22 +1,42 @@
 {
   
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^17.0.0",
-    "express": "^5.1.0",
-    "mongodb": "^6.17.0"
-  },
-    "name": "baby-names-backend",
-    "version": "1.0.0",
-    "main": "server.js",
-    "type": "module",
-    "scripts": {
-      "start": "node server.js"
-    }
-    
-    
   
+  "author": "",
+  
+  "license": "ISC",
+  
+  "dependencies": {
+  
+    
+  "cors": "^2.8.5",
+  
+    
+  "dotenv": "^17.0.0",
+  
+    
+  "express": "^5.1.0",
+  
+    
+  "gh": "^2.8.9",
+  
+    
+  "mongodb": "^6.17.0"
+  
+  },
+  
+  "name": "baby-names-backend",
+  
+  "version": "1.0.0",
+  
+  "main": "server.js",
+  
+  "type": "module",
+  
+  "scripts": {
+  
+    
+  "start": "node server.js"
+  
+  }
 }
