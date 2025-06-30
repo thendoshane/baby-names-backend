@@ -8,7 +8,7 @@ const PORT = 5501;
 
 // Configure CORS
 const corsOptions = {
-  origin: ['http://127.0.0.1:5500', 'http://localhost:5500'],
+  origin: ['https://baby-names-backend-hb4s.onrender.com/','http://127.0.0.1:5500', 'http://localhost:5500'],
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type']
 };
